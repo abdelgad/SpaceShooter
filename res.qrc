@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>sprites/Background.png</file>
+        <file>sprites/BlueBall.png</file>
+        <file>sprites/DualShot.png</file>
+        <file>sprites/EnemyShip1.png</file>
+        <file>sprites/EnemyShip2.png</file>
+        <file>sprites/Explosion1.png</file>
+        <file>sprites/Explosion2.png</file>
+        <file>sprites/JunkTiles.png</file>
+        <file>sprites/PlayerShip.png</file>
+        <file>sprites/SpikeTiles.png</file>
+        <file>sprites/YouLost Message.png</file>
+        <file>sprites/YouWonMessage.png</file>
+    </qresource>
+    <qresource prefix="/sounds"/>
+</RCC>

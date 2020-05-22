@@ -1,0 +1,22 @@
+PlayerShip.png : contient 16 frames dont les 4 premières sont pour avancer ou reculer, les 4 suivantes sont pour aller à gauche, et les 4 dernière sont pour aller à droite.
+- avance ou recule : 4 frames de 36x54 avec 100ms entre chaque frame
+- gauche : idem
+- droite : idem
+
+DualShot.png : 3 frames de 32x32 avec 100ms entre chaque frame
+
+EnemyShip1.png : 3 frames de 19x44 avec 100ms entre chaque frame
+
+EnemyShip2.png : 3 frames de 23x26 avec 100ms entre chaque frame
+
+Explosion1.png : 8 frames de 32x32 avec 100ms entre chaque frame
+
+Explosion2.png : 8 frames de 64x64 avec 100ms entre chaque frame
+
+BlueBall.png : 2 frames de 32x32 avec 100ms entre chaque frame
+
+JunkTiles.png : contient 60 tiles. 10x6 tiles, chacun de 32x32
+
+SpikeTiles.png : contient 36 tiles. 6x6 tiles, chacun de 32x32
+
+Background.png : 640x700
