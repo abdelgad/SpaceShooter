@@ -6,21 +6,25 @@
 #include <QObject>
 #include <QTimer>
 #include <QKeyEvent>
-#include <QtMath>
+#include "dualshot.h"
 
 class SpaceShip : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
+    //SpriteSheetInfo
     QPixmap spriteSheet;
+    int numSprites; //Par animation d'une certaine position
+    int spriteWidth;
+    int spriteHeight;
+    int numSpritesPerRow;
+
     int frameNumber;
-    int spaceShipWidth;
-    int spaceShipHeight;
     int speed;
+
     bool upKeyPressed;
     bool downKeyPressed;
     bool leftKeyPressed;
     bool rightKeyPressed;
-
 public:
     SpaceShip(QString spriteSheetLocation);
     int getSpaceShipWidth();
