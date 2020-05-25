@@ -31,12 +31,14 @@ class SpaceShip : public QObject, public QGraphicsPixmapItem
     void explode();
 public:
     SpaceShip(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int speed, int numLives, int numLifePoints);
+    ~SpaceShip();
     void loseNumLifePoints();
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent* event);
 signals:
     void numLivesModified(int);
     void numLifePointsModified(int);
+    void destroyed();
 private slots:
     void displayNextFrame();
     void manageMoveKeys();

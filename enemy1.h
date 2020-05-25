@@ -29,6 +29,8 @@ public:
 private slots:
     void displayNextFrame();
     void move();
+signals:
+    void destroyed();
 };
 
 #endif // ENEMY1_H

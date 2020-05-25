@@ -48,12 +48,15 @@ void DualShot::move()
         {
             dualShotCollided = true;
             dynamic_cast<Enemy1*>(collidingItem)->loseNumLifePoints();
-            this->scene()->removeItem(this);
-            delete this;
         }
     }
 
-    if(!dualShotCollided)
+    if(dualShotCollided)
+    {
+        this->scene()->removeItem(this);
+        delete this;
+    }
+    else
     {
         this->setPos(this->x(), this->y() - speed);
         if(this->y() + this->spriteHeight <= 0)

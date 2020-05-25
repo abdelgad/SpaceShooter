@@ -11,8 +11,16 @@
 
 class GameView : public QGraphicsView
 {
+    Q_OBJECT
     int gameViewWidth;
     int gameViewHeight;
+
+    int nbEnemies;
+
+private slots:
+    void deathToll();
+private slots:
+    void gameOver();
 
 public:
     GameView();

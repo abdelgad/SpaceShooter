@@ -26,7 +26,7 @@ Enemy1::Enemy1(QString spriteSheetLocation, int numSprites, int spriteWidth, int
 
 Enemy1::~Enemy1()
 {
- //TODO: emmit signal destroyed();
+    emit destroyed();
 }
 
 void Enemy1::explode()
@@ -81,17 +81,19 @@ void Enemy1::move()
         {
             enemy1Collided = true;
             dynamic_cast<SpaceShip*>(collidingItem)->loseNumLifePoints();
-            this->loseNumLifePoints();
         }
     }
 
-    if(!enemy1Collided)
+    if(enemy1Collided)
+    {
+        this->loseNumLifePoints();
+    }
+    else
     {
         this->setPos(this->x(), this->y() + speed);
         if(this->y() >= this->scene()->height())
         {
-            this->scene()->removeItem(this);
-            delete this;
+            this->setPos(this->x(), 0);
         }
     }
 }

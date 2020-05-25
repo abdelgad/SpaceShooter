@@ -36,6 +36,11 @@ SpaceShip::SpaceShip(QString spriteSheetLocation, int numSprites, int spriteWidt
     movementTimer->start(50);
 }
 
+SpaceShip::~SpaceShip()
+{
+    emit destroyed();
+}
+
 void SpaceShip::explode()
 {
     QString explosion1SpriteSheetLocation = QString(":/images/sprites/Explosion2.png");
@@ -55,12 +60,8 @@ void SpaceShip::explode()
 
 void SpaceShip::loseNumLifePoints()
 {
-    this->numLifePoints--;
-    emit numLifePointsModified(this->numLifePoints);
     if(numLifePoints == 0)
     {
-        this->numLives--;
-        emit numLivesModified(this->numLives);
         if(this->numLives == 0)
         {
             this->explode();
@@ -69,9 +70,16 @@ void SpaceShip::loseNumLifePoints()
         }
         else
         {
+            this->numLives--;
             this->numLifePoints = 10;
+            emit numLivesModified(this->numLives);
             emit numLifePointsModified(this->numLifePoints);
         }
+    }
+    else
+    {
+        this->numLifePoints--;
+        emit numLifePointsModified(this->numLifePoints);
     }
 }
 

@@ -5,7 +5,7 @@ NumLives::NumLives(int currentNumLives, int numLivesMax)
 {
     this->currentNumLives = currentNumLives;
     this->numLivesMax = numLivesMax;
-    setPlainText(QString::number(currentNumLives) + QString("/") + QString::number(numLivesMax));
+    setPlainText(QString("Lives: ") + QString::number(currentNumLives) + QString("/") + QString::number(numLivesMax));
     setDefaultTextColor(Qt::white);
     setFont(QFont("arial",20));
 }
@@ -13,5 +13,5 @@ NumLives::NumLives(int currentNumLives, int numLivesMax)
 void NumLives::updateNumLives(int numLives)
 {
     this->currentNumLives = numLives;
-    setPlainText(QString::number(currentNumLives) + QString("/") + QString::number(numLivesMax));
+    setPlainText(QString("Lives: ") + QString::number(currentNumLives) + QString("/") + QString::number(numLivesMax));
 }

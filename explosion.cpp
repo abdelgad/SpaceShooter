@@ -8,7 +8,6 @@ Explosion::Explosion(QString spriteSheetLocation, int numSprites, int spriteWidt
     this->spriteHeight = spriteHeight;
     this->numSpritesPerRow = this->spriteSheet.width() / this->spriteWidth;
 
-
     this->frameNumber = 1;
     this->setPos(x, y);
 
