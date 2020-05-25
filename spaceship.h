@@ -20,17 +20,23 @@ class SpaceShip : public QObject, public QGraphicsPixmapItem
 
     int frameNumber;
     int speed;
+    int numLives;
+    int numLifePoints;
 
     bool upKeyPressed;
     bool downKeyPressed;
     bool leftKeyPressed;
     bool rightKeyPressed;
+    bool spaceKeyPressed;
+    void explode();
 public:
-    SpaceShip(QString spriteSheetLocation);
-    int getSpaceShipWidth();
-    int getSpaceShipHeight();
+    SpaceShip(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int speed, int numLives, int numLifePoints);
+    void loseNumLifePoints();
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent* event);
+signals:
+    void numLivesModified(int);
+    void numLifePointsModified(int);
 private slots:
     void displayNextFrame();
     void manageMoveKeys();

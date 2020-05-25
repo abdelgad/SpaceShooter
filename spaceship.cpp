@@ -1,27 +1,25 @@
 #include "spaceship.h"
 #include <QDebug>
 
-SpaceShip::SpaceShip(QString spriteSheetLocation)
+SpaceShip::SpaceShip(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int speed, int numLives, int numLifePoints)
 {
-
-//    QString spriteSheetLocation = QString(":/images/sprites/PlayerShip.png");
-
     this->spriteSheet =  QPixmap(spriteSheetLocation);
-    this->numSprites = 4; //Par animation d'une certaine position
-    this->spriteHeight = 54;
-    this->spriteWidth = 36;
+    this->numSprites = numSprites; //Par animation d'une certaine position
+    this->spriteWidth = spriteWidth;
+    this->spriteHeight = spriteHeight;
     this->numSpritesPerRow = this->spriteSheet.width() / this->spriteWidth;
-
     this->frameNumber = 1;
-    this->speed = 30;
+
+    this->speed = speed;
+    this->numLives = numLives;
+    this->numLifePoints = numLifePoints;
 
     this->upKeyPressed = false;
     this->downKeyPressed = false;
     this->leftKeyPressed = false;
     this->rightKeyPressed = false;
+    this->spaceKeyPressed = false;
 
-
-    //setPixmap(this->spriteSheet);
 
     //Animation
     QTimer *frameTimer = new QTimer();
@@ -35,17 +33,46 @@ SpaceShip::SpaceShip(QString spriteSheetLocation)
     //Movement
     QTimer *movementTimer = new QTimer();
     connect(movementTimer, SIGNAL(timeout()), this, SLOT(manageMoveKeys()));
-    movementTimer->start(1000);
+    movementTimer->start(50);
 }
 
-int SpaceShip::getSpaceShipWidth()
+void SpaceShip::explode()
 {
-    return this->spriteWidth;
+    QString explosion1SpriteSheetLocation = QString(":/images/sprites/Explosion2.png");
+    int explosion1NumSprites = 8;
+    int explosion1SpriteWidth = 64;
+    int explosion1SpriteHeight = 64;
+    int x = this->x() + (this->spriteWidth / 2) - (explosion1SpriteWidth / 2);
+    int y = this->y() + (this->spriteHeight / 2) - (explosion1SpriteHeight / 2);
+    Explosion* explosion  = new Explosion(explosion1SpriteSheetLocation,
+                                          explosion1NumSprites,
+                                          explosion1SpriteWidth,
+                                          explosion1SpriteHeight,
+                                          x,
+                                          y);
+    this->scene()->addItem(explosion);
 }
 
-int SpaceShip::getSpaceShipHeight()
+void SpaceShip::loseNumLifePoints()
 {
-    return this->spriteHeight;
+    this->numLifePoints--;
+    emit numLifePointsModified(this->numLifePoints);
+    if(numLifePoints == 0)
+    {
+        this->numLives--;
+        emit numLivesModified(this->numLives);
+        if(this->numLives == 0)
+        {
+            this->explode();
+            this->scene()->removeItem(this);
+            delete this;
+        }
+        else
+        {
+            this->numLifePoints = 10;
+            emit numLifePointsModified(this->numLifePoints);
+        }
+    }
 }
 
 void SpaceShip::keyPressEvent(QKeyEvent *event)
@@ -72,10 +99,28 @@ void SpaceShip::keyPressEvent(QKeyEvent *event)
     }
     else if(event->key() == Qt::Key_Space)
     {
-        //TODO: comme on aura les informations du laser ici on pourra le centrer à l'aide de son width et son height
-        //J'envoie le point central de mon spaceship et c'est au dual shot de se positionner par rapport à ça
-        DualShot* dualshot = new DualShot((this->x() + (this->spriteWidth / 2)), this->y());
-        this->scene()->addItem(dualshot);
+
+        if(!spaceKeyPressed)
+        {
+            QString dualShotSpriteSheetLocation = QString(":/images/sprites/DualShot.png");
+            int dualShotNumSprites = 3;
+            int dualShotSpriteWidth = 32;
+            int dualShotSpriteHeight = 32;
+            int dualShotSpeed = 10;
+            int dualShotX = (this->x() + (this->spriteWidth / 2) - (dualShotSpriteWidth / 2));
+            int dualShotY = (this->y()  + (this->spriteHeight / 2) - (dualShotSpriteHeight / 2));
+
+
+            DualShot* dualShot = new DualShot(dualShotSpriteSheetLocation,
+                                              dualShotNumSprites,
+                                              dualShotSpriteWidth,
+                                              dualShotSpriteHeight,
+                                              dualShotSpeed,
+                                              dualShotX,
+                                              dualShotY);
+            this->scene()->addItem(dualShot);
+            spaceKeyPressed = true;
+        }
     }
 
 }
@@ -84,22 +129,26 @@ void SpaceShip::keyReleaseEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Up)
     {
-        upKeyPressed = false;
+        this->upKeyPressed = false;
     }
     else if(event->key() == Qt::Key_Down)
     {
-        downKeyPressed = false;
+        this->downKeyPressed = false;
     }
     else if(event->key() == Qt::Key_Left)
     {
         this->frameNumber = 1;
-        leftKeyPressed = false;
+        this->leftKeyPressed = false;
     }
     else if(event->key() == Qt::Key_Right)
     {
         this->frameNumber = 1;
-        rightKeyPressed = false;
-    }   
+        this->rightKeyPressed = false;
+    }
+    else if(event->key() == Qt::Key_Space)
+    {
+        this->spaceKeyPressed = false;
+    }
 }
 
 
@@ -134,7 +183,7 @@ void SpaceShip::manageMoveKeys()
     else if (upKeyPressed && this->y() - speed >= 0)
         setPos(this->x(), this->y() - this->speed);
 
-    else if (downKeyPressed && this->y() + this->getSpaceShipHeight() + speed <= this->scene()->height())
+    else if (downKeyPressed && this->y() + this->spriteHeight + speed <= this->scene()->height())
         setPos(this->x(), this->y() + this->speed);
 
     else if (rightKeyPressed && this->x() + this->spriteWidth + speed <= this->scene()->width())

@@ -1,14 +1,12 @@
-#ifndef DUALSHOT_H
-#define DUALSHOT_H
+#ifndef EXPLOSION_H
+#define EXPLOSION_H
 
 #include <QObject>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QTimer>
-#include "enemy1.h"
 
-
-class DualShot : public QObject, public QGraphicsPixmapItem
+class Explosion : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
     //SpritesheetInfo
@@ -17,14 +15,12 @@ class DualShot : public QObject, public QGraphicsPixmapItem
     int spriteWidth;
     int spriteHeight;
     int numSpritesPerRow;
-
     int frameNumber;
-    int speed;
 public:
-    DualShot(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int speed, int x, int y);
+    Explosion(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int x, int y);
 private slots:
     void displayNextFrame();
-    void move();
+    void explosionEnded();
 };
 
-#endif // DUALSHOT_H
+#endif // EXPLOSION_H

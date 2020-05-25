@@ -17,13 +17,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     dualshot.cpp \
+    enemy1.cpp \
+    explosion.cpp \
     gameview.cpp \
     main.cpp \
+    numlifepoints.cpp \
+    numlives.cpp \
     spaceship.cpp
 
 HEADERS += \
     dualshot.h \
+    enemy1.h \
+    explosion.h \
     gameview.h \
+    numlifepoints.h \
+    numlives.h \
     spaceship.h
 
 FORMS +=
