@@ -64,20 +64,46 @@ GameView::GameView()
     int enemy1SpriteWidth = 19;
     int enemy1SpriteHeight = 24;
     int enemy1Speed = 10;
-    int enemyNumLivesPoints = 1;
+    int enemy1NumLifePoints = 1;
+
+    //Enemy2
+    QString enemy2SpriteSheetLocation = QString(":/images/sprites/EnemyShip2.png");
+    int enemy2NumSprites = 3;
+    int enemy2SpriteWidth = 23;
+    int enemy2SpriteHeight = 26;
+    int enemy2Speed = 5;
+    int enemy2NumLifePoints = 3;
+
+
     for (int i = 0; i < 10; i++)
     {
+        nbEnemies++;
         Enemy1* enemy1 = new Enemy1(enemy1SpriteSheetLocation,
                                     enemy1NumSprites,
                                     enemy1SpriteWidth,
                                     enemy1SpriteHeight,
                                     enemy1Speed,
-                                    enemyNumLivesPoints
+                                    enemy1NumLifePoints
                                     );
         connect(enemy1, SIGNAL(destroyed()), this, SLOT(deathToll()));
         enemy1->setPos(gameScene->width() / 3, gameScene->height() / 3);
         gameScene->addItem(enemy1);
+    }
+
+    for (int i = 0; i < 1; i++)
+    {
         nbEnemies++;
+        Enemy2* enemy2 = new Enemy2(enemy2SpriteSheetLocation,
+                                    enemy2NumSprites,
+                                    enemy2SpriteWidth,
+                                    enemy2SpriteHeight,
+                                    enemy2Speed,
+                                    enemy2NumLifePoints
+                                    );
+        connect(enemy2, SIGNAL(destroyed()), this, SLOT(deathToll()));
+        enemy2->setPos((this->scene()->width() / 2) - (enemy2SpriteWidth / 2),
+                       0);
+        gameScene->addItem(enemy2);
     }
 }
 

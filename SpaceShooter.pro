@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     dualshot.cpp \
     enemy1.cpp \
+    enemy2.cpp \
     explosion.cpp \
     gameview.cpp \
     main.cpp \
@@ -28,6 +29,7 @@ SOURCES += \
 HEADERS += \
     dualshot.h \
     enemy1.h \
+    enemy2.h \
     explosion.h \
     gameview.h \
     numlifepoints.h \

@@ -6,8 +6,10 @@
 #include <QGraphicsItem>
 #include "spaceship.h"
 #include "enemy1.h"
+#include "enemy2.h"
 #include "numlives.h"
 #include "numlifepoints.h"
+
 
 class GameView : public QGraphicsView
 {
