@@ -1,7 +1,7 @@
-#include "dualshot.h"
+#include "blueball.h"
 
 
-DualShot::DualShot(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int speed, int x, int y)
+BlueBall::BlueBall(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int speed, double angle, int x, int y)
 {
     //SpritesheetInfo
     this->spriteSheet =  QPixmap(spriteSheetLocation);
@@ -12,6 +12,7 @@ DualShot::DualShot(QString spriteSheetLocation, int numSprites, int spriteWidth,
 
     this->frameNumber = 1;
     this->speed = speed;
+    this->blueBallAngle = angle;
     this->setPos(x, y);
 
     //Animation
@@ -25,7 +26,7 @@ DualShot::DualShot(QString spriteSheetLocation, int numSprites, int spriteWidth,
     movementTimer->start(50);
 }
 
-void DualShot::displayNextFrame()
+void BlueBall::displayNextFrame()
 {
     int column = ((frameNumber - 1) % this->numSpritesPerRow) * this->spriteWidth;
     int row = ((frameNumber - 1) / this->numSpritesPerRow) * this->spriteHeight;
@@ -39,32 +40,30 @@ void DualShot::displayNextFrame()
         frameNumber += 1;
 }
 
-void DualShot::move()
+void BlueBall::move()
 {
     QList<QGraphicsItem*> collidingItems = this->collidingItems();
-    bool dualShotCollided = false;
+    bool blueBallCollided = false;
     foreach(QGraphicsItem* collidingItem, collidingItems)
     {
-        if(typeid(*collidingItem) == typeid(Enemy1))
+        if(typeid(*collidingItem) == typeid(SpaceShip))
         {
-            dualShotCollided = true;
-            dynamic_cast<Enemy1*>(collidingItem)->loseNumLifePoints();
-        }
-        else if(typeid(*collidingItem) == typeid(Enemy2))
-        {
-            dualShotCollided = true;
-            dynamic_cast<Enemy2*>(collidingItem)->loseNumLifePoints();
+            blueBallCollided = true;
+            dynamic_cast<SpaceShip*>(collidingItem)->loseNumLifePoints();
         }
     }
 
-    if(dualShotCollided)
+    if(blueBallCollided)
     {
         this->scene()->removeItem(this);
         delete this;
     }
     else
     {
-        this->setPos(this->x(), this->y() - speed);
+        double dx = speed * qCos(qDegreesToRadians(this->blueBallAngle));
+        double dy = speed * qSin(qDegreesToRadians(this->blueBallAngle));
+        setPos(QPointF(this->x() + dx, this->y() + dy));
+
         if(this->y() + this->spriteHeight <= 0)
         {
             this->scene()->removeItem(this);
@@ -72,3 +71,8 @@ void DualShot::move()
         }
     }
 }
+
+
+
+
+

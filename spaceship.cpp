@@ -1,6 +1,7 @@
 #include "spaceship.h"
 #include <QDebug>
 
+
 SpaceShip::SpaceShip(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int speed, int numLives, int numLifePoints)
 {
     this->spriteSheet =  QPixmap(spriteSheetLocation);
@@ -20,11 +21,10 @@ SpaceShip::SpaceShip(QString spriteSheetLocation, int numSprites, int spriteWidt
     this->rightKeyPressed = false;
     this->spaceKeyPressed = false;
 
-
     //Animation
     QTimer *frameTimer = new QTimer();
     connect(frameTimer, SIGNAL(timeout()), this, SLOT(displayNextFrame()));
-    frameTimer->start(100);
+    frameTimer->start(150);
 
     //Focus
     setFlag(QGraphicsItem::ItemIsFocusable);
@@ -60,6 +60,9 @@ void SpaceShip::explode()
 
 void SpaceShip::loseNumLifePoints()
 {
+    this->numLifePoints--;
+    emit numLifePointsModified(this->numLifePoints);
+
     if(numLifePoints == 0)
     {
         if(this->numLives == 0)
@@ -75,11 +78,6 @@ void SpaceShip::loseNumLifePoints()
             emit numLivesModified(this->numLives);
             emit numLifePointsModified(this->numLifePoints);
         }
-    }
-    else
-    {
-        this->numLifePoints--;
-        emit numLifePointsModified(this->numLifePoints);
     }
 }
 
@@ -107,17 +105,15 @@ void SpaceShip::keyPressEvent(QKeyEvent *event)
     }
     else if(event->key() == Qt::Key_Space)
     {
-
         if(!spaceKeyPressed)
         {
             QString dualShotSpriteSheetLocation = QString(":/images/sprites/DualShot.png");
             int dualShotNumSprites = 3;
             int dualShotSpriteWidth = 32;
             int dualShotSpriteHeight = 32;
-            int dualShotSpeed = 10;
+            int dualShotSpeed = 20;
             int dualShotX = (this->x() + (this->spriteWidth / 2) - (dualShotSpriteWidth / 2));
-            int dualShotY = (this->y()  + (this->spriteHeight / 2) - (dualShotSpriteHeight / 2));
-
+            int dualShotY = (this->y() - dualShotSpriteHeight);
 
             DualShot* dualShot = new DualShot(dualShotSpriteSheetLocation,
                                               dualShotNumSprites,
@@ -158,7 +154,6 @@ void SpaceShip::keyReleaseEvent(QKeyEvent *event)
         this->spaceKeyPressed = false;
     }
 }
-
 
 void SpaceShip::displayNextFrame()
 {

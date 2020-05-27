@@ -1,5 +1,4 @@
 #include "gameview.h"
-#include<QDebug>
 
 
 GameView::GameView()
@@ -27,9 +26,9 @@ GameView::GameView()
     int spaceShipNumSprites = 4; //Par animation d'une certaine position
     int spaceShipSpriteWidth = 36;
     int spaceShipSpriteHeight = 54;
-    int spaceShipSpeed = 10;
-    int spaceShipNumLives = 0;
-    int spaceShipNumLifePoints = 5;
+    int spaceShipSpeed = 15;
+    int spaceShipNumLives = 3;
+    int spaceShipNumLifePoints = 10;
     SpaceShip* spaceship = new SpaceShip(spaceShipSpriteSheetLocation,
                                          spaceShipNumSprites,
                                          spaceShipSpriteWidth,
@@ -75,7 +74,7 @@ GameView::GameView()
     int enemy2NumLifePoints = 3;
 
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 1; i++)
     {
         nbEnemies++;
         Enemy1* enemy1 = new Enemy1(enemy1SpriteSheetLocation,
@@ -102,7 +101,7 @@ GameView::GameView()
                                     );
         connect(enemy2, SIGNAL(destroyed()), this, SLOT(deathToll()));
         enemy2->setPos((this->scene()->width() / 2) - (enemy2SpriteWidth / 2),
-                       0);
+                       this->scene()->height()/3);
         gameScene->addItem(enemy2);
     }
 }

@@ -1,5 +1,5 @@
 #include "enemy1.h"
-#include <QDebug>
+
 
 Enemy1::Enemy1(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int speed, int numLifePoints)
 {
@@ -16,12 +16,12 @@ Enemy1::Enemy1(QString spriteSheetLocation, int numSprites, int spriteWidth, int
         //Animation
         QTimer *frameTimer = new QTimer();
         connect(frameTimer, SIGNAL(timeout()), this, SLOT(displayNextFrame()));
-        frameTimer->start(100);
+        frameTimer->start(150);
 
         //Movement
         QTimer *movementTimer = new QTimer();
         connect(movementTimer, SIGNAL(timeout()), this, SLOT(move()));
-        movementTimer->start(200);
+        movementTimer->start(50);
 }
 
 Enemy1::~Enemy1()

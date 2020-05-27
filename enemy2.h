@@ -5,7 +5,7 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QTimer>
-#include <QThread>
+#include "blueball.h"
 
 class Enemy2 : public QObject, public QGraphicsPixmapItem
 {
@@ -23,7 +23,6 @@ class Enemy2 : public QObject, public QGraphicsPixmapItem
     int distanceTraveled;
     int distanceBeforeRedirection;
     bool immobile;
-;
 
     void explode();
 public:
@@ -34,6 +33,7 @@ private slots:
     void displayNextFrame();
     void move();
     void mobilize();
+    void shoot();
 signals:
     void destroyed();
 };

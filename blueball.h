@@ -1,16 +1,14 @@
-#ifndef DUALSHOT_H
-#define DUALSHOT_H
-
-//class Enemy1;
+#ifndef BLUEBALL_H
+#define BLUEBALL_H
 
 #include <QObject>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QTimer>
-#include "enemy1.h"
-#include "enemy2.h"
+#include <QtMath>
+#include "spaceship.h"
 
-class DualShot : public QObject, public QGraphicsPixmapItem
+class BlueBall : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
     //SpritesheetInfo
@@ -22,11 +20,12 @@ class DualShot : public QObject, public QGraphicsPixmapItem
 
     int frameNumber;
     int speed;
+    double blueBallAngle;
 public:
-    DualShot(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int speed, int x, int y);
+    BlueBall(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int speed, double blueBallAngle, int x, int y);
 private slots:
     void displayNextFrame();
     void move();
 };
 
-#endif // DUALSHOT_H
+#endif // BLUEBALL_H

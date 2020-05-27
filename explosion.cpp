@@ -1,5 +1,6 @@
 #include "explosion.h"
 
+
 Explosion::Explosion(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int x, int y)
 {
     this->spriteSheet =  QPixmap(spriteSheetLocation);
