@@ -1,23 +1,13 @@
 #ifndef ENEMY1_H
 #define ENEMY1_H
 
-#include <QObject>
-#include <QGraphicsPixmapItem>
-#include <QGraphicsScene>
-#include <QTimer>
 #include "explosion.h"
 #include "spaceship.h"
+#include "animateditem.h"
 
-class Enemy1 : public QObject, public QGraphicsPixmapItem
+class Enemy1 : public AnimatedItem
 {
     Q_OBJECT
-    QPixmap spriteSheet;
-    int numSprites;
-    int spriteWidth;
-    int spriteHeight;
-    int numSpritesPerRow;
-    int frameNumber;
-
     int speed;
     int numLifePoints;
 
@@ -27,7 +17,6 @@ public:
     ~Enemy1();
     void loseNumLifePoints();
 private slots:
-    void displayNextFrame();
     void move();
 signals:
     void destroyed();

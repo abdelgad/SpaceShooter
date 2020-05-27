@@ -2,25 +2,14 @@
 
 
 Enemy2::Enemy2(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int speed, int numLifePoints)
+    :AnimatedItem(spriteSheetLocation, numSprites, spriteWidth, spriteHeight)
 {
-    this->spriteSheet = QPixmap(spriteSheetLocation);
-    this->numSprites = numSprites;
-    this->spriteWidth = spriteWidth;
-    this->spriteHeight = spriteHeight;
-    this->numSpritesPerRow = this->spriteSheet.width() / this->spriteWidth;
-
-    this->frameNumber = 1;
     this->speed = speed;
     this->numLifePoints = numLifePoints;
     this->distanceBeforeRedirection = 20;
     this->direction = 1;
     this->distanceTraveled = 0;
     this->immobile = false;
-
-    //Animation
-    QTimer *frameTimer = new QTimer();
-    connect(frameTimer, SIGNAL(timeout()), this, SLOT(displayNextFrame()));
-    frameTimer->start(150);
 
     //Movement
     QTimer *movementTimer = new QTimer();
@@ -65,20 +54,6 @@ void Enemy2::loseNumLifePoints()
         this->scene()->removeItem(this);
         delete this;
     }
-}
-
-void Enemy2::displayNextFrame()
-{
-    int column = ((frameNumber - 1) % this->numSpritesPerRow) * this->spriteWidth;
-    int row = ((frameNumber - 1) / this->numSpritesPerRow) * this->spriteHeight;
-
-    QRect* myRect = new QRect(column, row, spriteWidth, spriteHeight);
-    setPixmap(spriteSheet.copy(*myRect));
-
-    if(frameNumber % this->numSprites == 0)
-        frameNumber -= (this->numSprites - 1);
-    else
-        frameNumber += 1;
 }
 
 void Enemy2::move()

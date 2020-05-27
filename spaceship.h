@@ -1,24 +1,13 @@
 #ifndef SPACESHIP_H
 #define SPACESHIP_H
 
-#include <QGraphicsPixmapItem>
-#include <QGraphicsScene>
-#include <QObject>
-#include <QTimer>
 #include <QKeyEvent>
+#include "animateditem.h"
 #include "dualshot.h"
 
-class SpaceShip : public QObject, public QGraphicsPixmapItem
+class SpaceShip : public AnimatedItem
 {
     Q_OBJECT
-    //SpriteSheetInfo
-    QPixmap spriteSheet;
-    int numSprites; //Par animation d'une certaine position
-    int spriteWidth;
-    int spriteHeight;
-    int numSpritesPerRow;
-
-    int frameNumber;
     int speed;
     int numLives;
     int numLifePoints;
@@ -40,7 +29,6 @@ signals:
     void numLifePointsModified(int);
     void destroyed();
 private slots:
-    void displayNextFrame();
     void manageMoveKeys();
 };
 

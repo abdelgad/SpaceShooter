@@ -1,16 +1,9 @@
 #include "spaceship.h"
-#include <QDebug>
 
 
 SpaceShip::SpaceShip(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int speed, int numLives, int numLifePoints)
+    : AnimatedItem(spriteSheetLocation, numSprites, spriteWidth, spriteHeight)
 {
-    this->spriteSheet =  QPixmap(spriteSheetLocation);
-    this->numSprites = numSprites; //Par animation d'une certaine position
-    this->spriteWidth = spriteWidth;
-    this->spriteHeight = spriteHeight;
-    this->numSpritesPerRow = this->spriteSheet.width() / this->spriteWidth;
-    this->frameNumber = 1;
-
     this->speed = speed;
     this->numLives = numLives;
     this->numLifePoints = numLifePoints;
@@ -20,11 +13,6 @@ SpaceShip::SpaceShip(QString spriteSheetLocation, int numSprites, int spriteWidt
     this->leftKeyPressed = false;
     this->rightKeyPressed = false;
     this->spaceKeyPressed = false;
-
-    //Animation
-    QTimer *frameTimer = new QTimer();
-    connect(frameTimer, SIGNAL(timeout()), this, SLOT(displayNextFrame()));
-    frameTimer->start(150);
 
     //Focus
     setFlag(QGraphicsItem::ItemIsFocusable);
@@ -83,7 +71,6 @@ void SpaceShip::loseNumLifePoints()
 
 void SpaceShip::keyPressEvent(QKeyEvent *event)
 {
-
     if(event->key() == Qt::Key_Up)
     {
         upKeyPressed = true;
@@ -99,7 +86,7 @@ void SpaceShip::keyPressEvent(QKeyEvent *event)
     }
     else if(event->key() == Qt::Key_Right)
     {
-        //TODO: faire un slot pour le changement de position que ça déclenche un changement de framenumber
+        //TODO: faire un signal/slot pour le changement de position que ça déclenche un changement de framenumber
         this->frameNumber = ((this->numSprites * 2) + 1); ; //commence l'itération à partir du 9ème frame (le 2 correspond à la position 2)
         rightKeyPressed = true;
     }
@@ -126,7 +113,6 @@ void SpaceShip::keyPressEvent(QKeyEvent *event)
             spaceKeyPressed = true;
         }
     }
-
 }
 
 void SpaceShip::keyReleaseEvent(QKeyEvent *event)
@@ -153,20 +139,6 @@ void SpaceShip::keyReleaseEvent(QKeyEvent *event)
     {
         this->spaceKeyPressed = false;
     }
-}
-
-void SpaceShip::displayNextFrame()
-{
-    int column = ((frameNumber - 1) % this->numSpritesPerRow) * this->spriteWidth;
-    int row = ((frameNumber - 1) / this->numSpritesPerRow) * this->spriteHeight;
-
-    QRect* myRect = new QRect(column, row, spriteWidth, spriteHeight);
-    setPixmap(spriteSheet.copy(*myRect));
-
-    if(frameNumber % this->numSprites == 0)
-        frameNumber -= (this->numSprites - 1);
-    else
-        frameNumber += 1;
 }
 
 void SpaceShip::manageMoveKeys()

@@ -1,22 +1,12 @@
 #ifndef ENEMY2_H
 #define ENEMY2_H
 
-#include <QObject>
-#include <QGraphicsPixmapItem>
-#include <QGraphicsScene>
-#include <QTimer>
+#include "animateditem.h"
 #include "blueball.h"
 
-class Enemy2 : public QObject, public QGraphicsPixmapItem
+class Enemy2 : public AnimatedItem
 {
     Q_OBJECT
-    QPixmap spriteSheet;
-    int numSprites;
-    int spriteWidth;
-    int spriteHeight;
-    int numSpritesPerRow;
-    int frameNumber;
-
     int speed;
     int numLifePoints;
     int direction;
@@ -30,7 +20,6 @@ public:
     ~Enemy2();
     void loseNumLifePoints();
 private slots:
-    void displayNextFrame();
     void move();
     void mobilize();
     void shoot();

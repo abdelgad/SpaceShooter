@@ -27,8 +27,8 @@ GameView::GameView()
     int spaceShipSpriteWidth = 36;
     int spaceShipSpriteHeight = 54;
     int spaceShipSpeed = 15;
-    int spaceShipNumLives = 3;
-    int spaceShipNumLifePoints = 10;
+    int spaceShipNumLives = 0;
+    int spaceShipNumLifePoints = 3;
     SpaceShip* spaceship = new SpaceShip(spaceShipSpriteSheetLocation,
                                          spaceShipNumSprites,
                                          spaceShipSpriteWidth,

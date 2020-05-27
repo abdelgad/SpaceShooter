@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    animateditem.cpp \
     blueball.cpp \
     dualshot.cpp \
     enemy1.cpp \
@@ -28,6 +29,7 @@ SOURCES += \
     spaceship.cpp
 
 HEADERS += \
+    animateditem.h \
     blueball.h \
     dualshot.h \
     enemy1.h \
