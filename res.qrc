@@ -11,5 +11,4 @@
         <file>sprites/YouLost Message.png</file>
         <file>sprites/YouWonMessage.png</file>
     </qresource>
-    <qresource prefix="/sounds"/>
 </RCC>

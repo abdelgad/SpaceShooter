@@ -1,5 +1,6 @@
 #include "animateditem.h"
 
+
 AnimatedItem::AnimatedItem(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight)
 {
     this->spriteSheet = QPixmap(spriteSheetLocation);

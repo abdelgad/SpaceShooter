@@ -17,8 +17,19 @@ protected:
     int spriteHeight;
     int frameNumber;
 public:
+    /**
+     * @brief Reçoit les différentes proprietés d'une spritesheet afin de pouvoir itérer dessus
+     * @param spriteSheetLocation
+     * @param numSprites
+     * @param spriteWidth
+     * @param spriteHeight
+     */
     AnimatedItem(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight);
 private slots:
+    /**
+     * @brief permet d'itérer sur les différents frames/sprites d'une spritesheet
+     * selon le membre "frameNumber de la classe, le compteur frameNumber commence à 1 et pas à 0
+     */
     void displayNextFrame();
 };
 

@@ -13,6 +13,10 @@ class NumLifePoints : public QGraphicsTextItem
 public:
     NumLifePoints(int currentNumLifePoints, int numLifePointsMax);
 public slots:
+    /**
+     * @brief met à jour le TextItem selon le numLifePoints reçu en paramètre
+     * @param numLifePoints: le nouveau numLifePoints
+     */
     void updateNumLifePoints(int numLifePoints);
 };
 

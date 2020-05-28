@@ -9,6 +9,9 @@ class Explosion : public AnimatedItem
 public:
     Explosion(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int x, int y);
 private slots:
+    /**
+     * @brief Permet de détruire l'objet explosion (delete) après la fin de l'animation
+     */
     void explosionEnded();
 };
 

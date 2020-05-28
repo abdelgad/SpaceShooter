@@ -38,7 +38,7 @@ void BlueBall::move()
         double dy = speed * qSin(qDegreesToRadians(this->blueBallAngle));
         setPos(QPointF(this->x() + dx, this->y() + dy));
 
-        if(this->y() + this->spriteHeight <= 0)
+        if(this->y() >= this->scene()->height())
         {
             this->scene()->removeItem(this);
             delete this;

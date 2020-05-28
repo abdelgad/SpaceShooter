@@ -12,6 +12,9 @@ class DualShot : public AnimatedItem
 public:
     DualShot(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int speed, int x, int y);
 private slots:
+    /**
+     * @brief sert de déplacer le dualshot selon le membre "speed" de la classe
+     */
     void move();
 };
 

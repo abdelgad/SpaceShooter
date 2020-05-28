@@ -20,8 +20,18 @@ class GameView : public QGraphicsView
     bool gameEnded;
 
 private slots:
+    /**
+     * @brief convoque un ensemble d'ennemies (les ajoute à la scène)
+     */
     void spawnWaveOfEnemies();
+    /**
+     * @brief décrémente le nombre d'ennemies qui existent, ce nombre arrivé à 0
+     * affiche le YouWon sprite
+     */
     void deathToll();
+    /**
+     * @brief affiche le YouLose sprite à l'écran
+     */
     void gameOver();
 
 public:
