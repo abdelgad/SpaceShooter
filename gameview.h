@@ -17,6 +17,7 @@ class GameView : public QGraphicsView
     int gameViewWidth;
     int gameViewHeight;
     int nbEnemies;
+    int nbEnemiesPerWave;
     bool gameEnded;
 
 private slots:

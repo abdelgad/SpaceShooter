@@ -6,6 +6,7 @@ GameView::GameView()
     this->gameViewWidth = 640;
     this->gameViewHeight = 594;
     this->nbEnemies = 0;
+    this->nbEnemiesPerWave = 7;
     this->gameEnded = false;
 
     //ViewSettings
@@ -60,9 +61,10 @@ GameView::GameView()
 
 
     //Spawning
-    int delayBetweenWaves = 2000; // 2 seconds between waves
+    int delayBetweenWaves = 4000; // 2 seconds between waves
     for (int i = 0; i < 5; i++) // 5 waves of enemies
     {
+        this->nbEnemies += this->nbEnemiesPerWave;
         QTimer::singleShot((i * delayBetweenWaves), this, SLOT(spawnWaveOfEnemies()));
     }
 }
@@ -92,7 +94,6 @@ void GameView::spawnWaveOfEnemies()
 
     for (int i = 0; i < 6; i++) // 6 enemies1 per wave
     {
-        nbEnemies++;
         Enemy1* enemy1 = new Enemy1(enemy1SpriteSheetLocation,
                                     enemy1NumSprites,
                                     enemy1SpriteWidth,
@@ -111,7 +112,6 @@ void GameView::spawnWaveOfEnemies()
 
     for(int i = 0; i < 1; i++) // 1 enemy2 per wave
     {
-        nbEnemies++;
         Enemy2* enemy2 = new Enemy2(enemy2SpriteSheetLocation,
                                     enemy2NumSprites,
                                     enemy2SpriteWidth,

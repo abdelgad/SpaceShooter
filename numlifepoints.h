@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QGraphicsTextItem>
 #include <QFont>
+#include <sstream>
+#include <iomanip>
 
 class NumLifePoints : public QGraphicsTextItem
 {

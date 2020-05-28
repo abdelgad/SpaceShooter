@@ -5,7 +5,9 @@ NumLifePoints::NumLifePoints(int currentNumLifePoints, int numLifePointsMax)
 {
     this->currentNumLifePoints = currentNumLifePoints;
     this->numLifePointsMax = numLifePointsMax;
-    setPlainText(QString::number(currentNumLifePoints) + QString("/") + QString::number(numLifePointsMax));
+    std::stringstream ss;
+    ss << std::setw(2) << std::setfill('0') << currentNumLifePoints;
+    setPlainText((QString::fromStdString(ss.str())) + QString("/") + QString::number(numLifePointsMax));
     setDefaultTextColor(Qt::white);
     setFont(QFont("arial",20));
 }
@@ -13,5 +15,7 @@ NumLifePoints::NumLifePoints(int currentNumLifePoints, int numLifePointsMax)
 void NumLifePoints::updateNumLifePoints(int numLifePoints)
 {
     this->currentNumLifePoints = numLifePoints;
-    setPlainText(QString::number(currentNumLifePoints) + QString("/") + QString::number(numLifePointsMax));
+    std::stringstream ss;
+    ss << std::setw(2) << std::setfill('0') << currentNumLifePoints;
+    setPlainText((QString::fromStdString(ss.str())) + QString("/") + QString::number(numLifePointsMax));
 }
