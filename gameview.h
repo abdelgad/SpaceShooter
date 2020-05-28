@@ -16,12 +16,12 @@ class GameView : public QGraphicsView
     Q_OBJECT
     int gameViewWidth;
     int gameViewHeight;
-
     int nbEnemies;
+    bool gameEnded;
 
 private slots:
+    void spawnWaveOfEnemies();
     void deathToll();
-private slots:
     void gameOver();
 
 public:

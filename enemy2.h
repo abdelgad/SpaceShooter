@@ -16,7 +16,7 @@ class Enemy2 : public AnimatedItem
 
     void explode();
 public:
-    Enemy2(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int speed, int numLifePoints);
+    Enemy2(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int speed, int numLifePoints, int distanceBeforeRedirection);
     ~Enemy2();
     void loseNumLifePoints();
 private slots:

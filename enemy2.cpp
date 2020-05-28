@@ -1,12 +1,12 @@
 #include "enemy2.h"
 
 
-Enemy2::Enemy2(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int speed, int numLifePoints)
+Enemy2::Enemy2(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int speed, int numLifePoints, int distanceBeforeRedirection)
     :AnimatedItem(spriteSheetLocation, numSprites, spriteWidth, spriteHeight)
 {
     this->speed = speed;
     this->numLifePoints = numLifePoints;
-    this->distanceBeforeRedirection = 20;
+    this->distanceBeforeRedirection = distanceBeforeRedirection;
     this->direction = 1;
     this->distanceTraveled = 0;
     this->immobile = false;
