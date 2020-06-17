@@ -4,6 +4,8 @@
 #include <QKeyEvent>
 #include "animateditem.h"
 #include "dualshot.h"
+#include "superpower.h"
+#include "bonusball.h"
 
 class SpaceShip : public AnimatedItem
 {
@@ -11,6 +13,7 @@ class SpaceShip : public AnimatedItem
     int speed;
     int numLives;
     int numLifePoints;
+    bool poweredUp;
 
     bool upKeyPressed;
     bool downKeyPressed;
@@ -30,6 +33,7 @@ public:
      * les règles de jeu
      */
     void loseNumLifePoints();
+    void powerUp();
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent* event);
 signals:
@@ -45,6 +49,8 @@ signals:
      * @brief signal émis lorsque le spaceship se fait détruire (delete)
      */
     void destroyed();
+
+    void moved(int, int);
 private slots:
     void manageMoveKeys();
 };

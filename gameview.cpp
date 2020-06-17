@@ -7,6 +7,7 @@ GameView::GameView()
     this->gameViewHeight = 594;
     this->nbEnemies = 0;
     this->nbEnemiesPerWave = 7;
+    this->nbEnemiesKilled = 0;
     this->gameEnded = false;
 
     //ViewSettings
@@ -61,13 +62,16 @@ GameView::GameView()
 
 
     //Spawning
-    int delayBetweenWaves = 4000; // 2 seconds between waves
-    for (int i = 0; i < 5; i++) // 5 waves of enemies
+    int delayBetweenWaves = 4000; // 4 secondes entre les vagues
+    int numWaves = 5;
+    for (int i = 0; i < numWaves; i++) // 5 vagues d'ennemies
     {
         this->nbEnemies += this->nbEnemiesPerWave;
         QTimer::singleShot((i * delayBetweenWaves), this, SLOT(spawnWaveOfEnemies()));
     }
 }
+
+
 
 void GameView::spawnWaveOfEnemies()
 {
@@ -102,6 +106,7 @@ void GameView::spawnWaveOfEnemies()
                                     enemy1NumLifePoints
                                     );
         connect(enemy1, SIGNAL(destroyed()), this, SLOT(deathToll()));
+        connect(enemy1, SIGNAL(destroyed()), this, SLOT(enemyKilled()));
         posX = (qrand() % ((xMax + 1) - xMin) + xMin);
         enemy1->setPos(posX, 0);
         this->scene()->addItem(enemy1);
@@ -121,9 +126,41 @@ void GameView::spawnWaveOfEnemies()
                                     enemy2DistanceBeforeRedirection
                                     );
         connect(enemy2, SIGNAL(destroyed()), this, SLOT(deathToll()));
+        connect(enemy2, SIGNAL(destroyed()), this, SLOT(enemyKilled()));
         posX = (qrand() % ((xMax + 1) - xMin) + xMin);
         enemy2->setPos(posX, 0);
         this->scene()->addItem(enemy2);
+    }
+}
+
+
+void GameView::enemyKilled()
+{
+    this->nbEnemiesKilled++;
+
+    if(nbEnemiesKilled % 5 == 0)
+    {
+        QString bonusBallSpriteSheetLocation = QString(":/images/sprites/BonusBall.png");
+        int bonusBallNumSprites = 6;
+        int bonusBallSpriteWidth = 34;
+        int bonusBallSpriteHeight = 32;
+        int duration = 5;
+
+        int xMin = 0;
+        int xMax = this->scene()->width() - bonusBallSpriteWidth;
+        int yMin = 0;
+        int yMax = this->scene()->height() - bonusBallSpriteHeight;
+
+        BonusBall* bonusBall  = new BonusBall(bonusBallSpriteSheetLocation,
+                                              bonusBallNumSprites,
+                                              bonusBallSpriteWidth,
+                                              bonusBallSpriteHeight,
+                                              duration
+                                           );
+        int posX = (qrand() % ((xMax + 1) - xMin) + xMin);
+        int posY = (qrand() % ((yMax + 1) - yMin) + yMin);
+        bonusBall->setPos(posX, posY);
+        this->scene()->addItem(bonusBall);
     }
 }
 

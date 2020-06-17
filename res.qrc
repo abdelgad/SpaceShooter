@@ -10,5 +10,6 @@
         <file>sprites/PlayerShip.png</file>
         <file>sprites/YouLost Message.png</file>
         <file>sprites/YouWonMessage.png</file>
+        <file>sprites/BonusBall.png</file>
     </qresource>
 </RCC>

@@ -1,0 +1,12 @@
+-ajout d'une classe Blueball
+-ajout d'un slot enemyKilled() dans GameView.cp
+-lier le slot enemyKilled() à chaque signal d'un enemy destroyed(); dans GameView.cp
+-création d'une classe SuperPower (ça sera le bouclier);
+-création d'un signal moved() dans la classe SpaceShip;
+-création d'un fonction powerUp() dans la classe SpaceShip;
+-création de test de collision dans la fonction managMoveKeys() de la classe SpaceShip;
+
+
+Question 3)
+
+l'utilisation des threads.

@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     animateditem.cpp \
     blueball.cpp \
+    bonusball.cpp \
     dualshot.cpp \
     enemy1.cpp \
     enemy2.cpp \
@@ -26,11 +27,13 @@ SOURCES += \
     main.cpp \
     numlifepoints.cpp \
     numlives.cpp \
-    spaceship.cpp
+    spaceship.cpp \
+    superpower.cpp
 
 HEADERS += \
     animateditem.h \
     blueball.h \
+    bonusball.h \
     dualshot.h \
     enemy1.h \
     enemy2.h \
@@ -38,7 +41,8 @@ HEADERS += \
     gameview.h \
     numlifepoints.h \
     numlives.h \
-    spaceship.h
+    spaceship.h \
+    superpower.h
 
 FORMS +=
 

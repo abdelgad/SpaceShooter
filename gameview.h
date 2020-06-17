@@ -9,6 +9,7 @@
 #include "enemy2.h"
 #include "numlives.h"
 #include "numlifepoints.h"
+#include "bonusball.h"
 
 
 class GameView : public QGraphicsView
@@ -18,9 +19,11 @@ class GameView : public QGraphicsView
     int gameViewHeight;
     int nbEnemies;
     int nbEnemiesPerWave;
+    int nbEnemiesKilled;
     bool gameEnded;
 
-private slots:
+private slots:  
+    void enemyKilled();
     /**
      * @brief convoque un ensemble d'ennemies (les ajoute à la scène)
      */

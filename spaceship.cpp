@@ -1,12 +1,12 @@
 #include "spaceship.h"
 
-
 SpaceShip::SpaceShip(QString spriteSheetLocation, int numSprites, int spriteWidth, int spriteHeight, int speed, int numLives, int numLifePoints)
     : AnimatedItem(spriteSheetLocation, numSprites, spriteWidth, spriteHeight)
 {
     this->speed = speed;
     this->numLives = numLives;
     this->numLifePoints = numLifePoints;
+    this->poweredUp = false;
 
     this->upKeyPressed = false;
     this->downKeyPressed = false;
@@ -141,6 +141,23 @@ void SpaceShip::keyReleaseEvent(QKeyEvent *event)
     }
 }
 
+void SpaceShip::powerUp()
+{
+    if(!poweredUp)
+    {
+        SuperPower* superPower = new SuperPower(this->boundingRect().width(),
+                                              this->boundingRect().height(),
+                                              this->x(),
+                                              this->y()
+                                              );
+
+        connect(this, SIGNAL(moved(int, int)), superPower, SLOT(move(int, int)));
+        this->scene()->addItem(superPower);
+
+        poweredUp = true;
+    }
+}
+
 void SpaceShip::manageMoveKeys()
 {
     if(upKeyPressed && leftKeyPressed && this->x() - speed >= 0  && this->y() - speed >= 0)
@@ -166,4 +183,19 @@ void SpaceShip::manageMoveKeys()
 
     else if (leftKeyPressed && this->x() - speed >= 0)
         setPos(this->x() - this->speed, this->y());
+
+    emit moved(this->x(), this->y());
+
+    QList<QGraphicsItem*> collidingItems = this->collidingItems();
+    bool spaceShipCollied = false;
+    foreach(QGraphicsItem* collidingItem, collidingItems)
+    {
+        if(typeid(*collidingItem) == typeid(BonusBall))
+        {
+            spaceShipCollied = true;
+            this->powerUp();
+            this->scene()->removeItem(collidingItem);
+            delete collidingItem;
+        }
+    }
 }
