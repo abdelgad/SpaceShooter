@@ -1,4 +1,4 @@
--ajout d'une classe Blueball
+-ajout d'une classe BonusBall
 -ajout d'un slot enemyKilled() dans GameView.cp
 -lier le slot enemyKilled() à chaque signal d'un enemy destroyed(); dans GameView.cp
 -création d'une classe SuperPower (ça sera le bouclier);
@@ -9,4 +9,4 @@
 
 Question 3)
 
-l'utilisation des threads.
+l'utilisation des threads (mais QTimer utilise déjà des threads!).
